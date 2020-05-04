@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HandyEditor</title>
+    <style type="text/css">
+    small{font-size: 14px;color: #aaa;}
+    pre{padding: 5px;background-color: #eee;}
+    .textcenter{text-align: center;}
+    </style>
+  </head>
+  <body>
+    <textarea id="editor" name="editor" rows="5" style="display: none;"></textarea>
+    <br>
+    <button onclick="getHtml()">获取HTML</button>&nbsp;&nbsp;
+    <button onclick="getText()">获取纯文本</button>&nbsp;&nbsp;
+    <button onclick="he.clean()">清空</button>
+    <br><br>
+    <h5>获取编辑器中的内容</h5>
+    <pre>he.getHtml();//获取HTML代码</pre>
+    <pre>he.getText();//获取纯文本</pre>
+    <br>
+    
+    <script src="HandyEditor.min.js"></script>
+    <script type="text/javascript">
+
+      let he = HE.getEditor('editor');
+      function copy(val, callback=function(){}) {
+        const input = document.createElement('input');
+        document.body.appendChild(input);
+        input.setAttribute('value', val);
+        input.select();
+        if (document.execCommand('copy')) {
+          document.execCommand('copy');
+          console.log('复制成功');
+          callback()
+        }
+        document.body.removeChild(input);
+      }
+      function getHtml(){
+        copy(he.getHtml());
+      }
+      function getText(){
+        copy(he.getText());
+      }
+    </script>
+  </body>
+</html>
